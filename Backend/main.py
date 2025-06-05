@@ -1,9 +1,7 @@
 import sqlite3
 import datetime
-
 def conectar():
     return sqlite3.connect('academico.db')
-
 def menu():
     print("\n--- Sistema Acadêmico ---")
     print("1 - Cadastrar Aluno")
@@ -23,7 +21,6 @@ def menu():
     print("15 - Verificar Conclusão de Curso")
     print("0 - Sair")
     return input("Escolha uma opção: ")
-
 def cadastrar_aluno():
     matricula = input("Matrícula do aluno: ")
     nome = input("Nome do aluno: ")
@@ -108,10 +105,8 @@ def verificar_aprovacao_aluno():
         print("Nenhuma nota encontrada para este aluno.")
         conn.close()
         return
-
     media = sum([n[1] for n in notas]) / len(notas)
     print(f"Média do aluno: {media:.2f}")
-
     if media >= 7:
         print("Aluno aprovado!")
     elif 4 <= media < 7:
@@ -201,11 +196,6 @@ def verificar_conclusao_curso():
         # Aqui você pode emitir o certificado, se quiser
     else:
         print(f"Aluno aprovado em {aprovadas} disciplinas. Ainda não concluiu o curso.")
-    conn.close()
-def verificar_conclusao_curso():
-    matricula = input("Digite a matrícula do aluno: ")
-    conn = conectar()
-    # Busca todas as notas do aluno com nota >= 7
     aprovadas = conn.execute("""
         SELECT COUNT(*)
         FROM notas
